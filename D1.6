@@ -1,1 +1,21 @@
 
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+import java.math.*;
+
+public class Solution{
+    public static int maximumProfit(ArrayList<Integer> prices)
+    {
+        int current_profit=0;
+        int maximum_profit=0;
+        int minimum_value_so_far=prices.get(0);
+        for(int i=1;i<prices.size();i++)
+        {
+            minimum_value_so_far=Math.min(prices.get(i),minimum_value_so_far);
+            current_profit=prices.get(i)-minimum_value_so_far;
+            maximum_profit=Math.max(maximum_profit,current_profit);
+        }
+        return maximum_profit;
+    }
+}
