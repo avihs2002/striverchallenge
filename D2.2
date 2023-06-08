@@ -1,1 +1,44 @@
 
+import java.util.*;
+
+/*******************************************************
+
+    Following is the Interval class structure
+
+    class Interval {
+        int start, int finish;
+
+        Interval(int start, int finish) {
+            this.start = start;
+            this.finish = finish;
+        }
+    }
+    
+*******************************************************/
+
+public class Solution {
+    public static List<Interval> mergeIntervals(Interval[] intervals) {
+        Arrays.sort(intervals, new Comparator<Interval>() {
+            public int compare(Interval a, Interval b) {
+                return a.start - b.start;
+            }
+        });
+
+        List<Interval> merged = new ArrayList<>();
+        int start = intervals[0].start;
+        int end = intervals[0].finish;
+
+        for (Interval interval : intervals) {
+            if (interval.start <= end) {
+                end = Math.max(end, interval.finish);
+            } else {
+                merged.add(new Interval(start, end));
+                start = interval.start;
+                end = interval.finish;
+            }
+        }
+
+        merged.add(new Interval(start, end));
+        return merged;
+    }
+}
